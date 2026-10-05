@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OMCRAFT | Minecraft World</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#080b10;
+    color:white;
+    transition:0.3s;
+}
+
+body.light{
+    background:#f1f3f5;
+    color:#111;
+}
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 7%;
+    background:rgba(5,8,12,.94);
+    border-bottom:1px solid #29313a;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.logo span,
+.green{
+    color:#55d62e;
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+nav a{
+    color:#ddd;
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:#55d62e;
+}
+
+#themeBtn{
+    background:#55d62e;
+    border:0;
+    padding:9px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:100px 20px 50px;
+    background:
+    radial-gradient(circle at center,#1d4725,#080b10 65%);
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 16px;
+    border:1px solid #55d62e;
+    border-radius:30px;
+    color:#55d62e;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(55px,10vw,105px);
+    letter-spacing:5px;
+    text-shadow:5px 5px #151b16;
+}
+
+.hero h2{
+    margin:15px 0;
+}
+
+.hero p{
+    color:#aeb6bd;
+    line-height:1.7;
+    max-width:650px;
+    margin:auto;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 25px;
+    margin:6px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.primary{
+    background:#55d62e;
+    color:#071006;
+}
+
+.secondary{
+    border:1px solid #555;
+    color:white;
+}
+
+/* SECTIONS */
+
+section{
+    padding:90px 7%;
+}
+
+.title{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#929aa2;
+    max-width:650px;
+    margin:0 auto 45px;
+    line-height:1.6;
+}
+
+/* CARDS */
+
+.cards{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:#10151b;
+    border:1px solid #29313a;
+    border-radius:12px;
+    padding:30px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#55d62e;
+}
+
+.icon{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#929aa2;
+    line-height:1.6;
+}
+
+/* BLOCK */
+
+.block-area{
+    text-align:center;
+    background:#0c1116;
+}
+
+.block{
+    width:120px;
+    height:120px;
+    margin:35px auto;
+    background:
+    linear-gradient(135deg,#55d62e 0 50%,#368d20 50%);
+    border:8px solid #1e5214;
+    box-shadow:12px 12px 0 #111;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.block:hover{
+    transform:rotate(8deg) scale(1.08);
+}
+
+/* XP */
+
+.xp-box{
+    max-width:600px;
+    margin:30px auto;
+    text-align:center;
+    padding:30px;
+    background:#10151b;
+    border:1px solid #29313a;
+    border-radius:12px;
+}
+
+.xp{
+    font-size:40px;
+    color:#55d62e;
+    margin:15px;
+}
+
+.xp-box button{
+    padding:12px 20px;
+    border:0;
+    border-radius:6px;
+    background:#55d62e;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* QUIZ */
+
+.quiz{
+    max-width:650px;
+    margin:auto;
+    padding:30px;
+    background:#10151b;
+    border:1px solid #29313a;
+    border-radius:12px;
+    text-align:center;
+}
+
+.quiz button{
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:12px;
+    background:#181f27;
+    color:white;
+    border:1px solid #333;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.quiz button:hover{
+    border-color:#55d62e;
+}
+
+#result{
+    margin-top:20px;
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:35px;
+    background:#05070a;
+    color:#777;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    nav ul{
+        display:none;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        padding:70px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        OM<span>CRAFT</span>
+    </div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#world">World</a></li>
+        <li><a href="#xp">XP</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+    </ul>
+
+    <button id="themeBtn" onclick="changeTheme()">🌙</button>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🎮 MINECRAFT COMMUNITY
+        </div>
+
+        <h1>OM<span class="green">CRAFT</span></h1>
+
+        <h2>Build. Explore. Survive.</h2>
+
+        <p>
+            Welcome to OMCRAFT — a Minecraft world created by Om.
+            Explore adventures, builds, projects and interactive
+            Minecraft features.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#world" class="btn primary">
+                EXPLORE WORLD
+            </a>
+
+            <a href="#quiz" class="btn secondary">
+                PLAY QUIZ
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WORLD -->
+
+<section id="world">
+
+    <h2 class="title">
+        Explore <span class="green">OMCRAFT</span>
+    </h2>
+
+    <p class="subtitle">
+        Discover the world of OMCRAFT and start your adventure.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🌲</div>
+            <h3>Survival</h3>
+            <p>
+                Collect resources, build your base
+                and survive the Minecraft world.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏰</div>
+            <h3>Epic Builds</h3>
+            <p>
+                Create castles, houses, farms
+                and amazing Minecraft structures.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌎</div>
+            <h3>Adventure</h3>
+            <p>
+                Explore new places and create
+                your own Minecraft story.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTERACTIVE BLOCK -->
+
+<section class="block-area">
+
+    <h2 class="title">
+        Interactive <span class="green">Block</span>
+    </h2>
+
+    <p class="subtitle">
+        Click the Minecraft block!
+    </p>
+
+    <div class="block" onclick="breakBlock()"></div>
+
+    <h3 id="blockText">
+        ⛏️ Break the block
+    </h3>
+
+</section>
+
+
+<!-- XP -->
+
+<section id="xp">
+
+    <h2 class="title">
+        Your <span class="green">XP</span>
+    </h2>
+
+    <p class="subtitle">
+        Break blocks and collect experience.
+    </p>
+
+    <div class="xp-box">
+
+        <div class="xp">
+            XP: <span id="xpValue">0</span>
+        </div>
+
+        <button onclick="addXP()">
+            ⛏️ Mine Block
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quiz">
+
+    <h2 class="title">
+        Minecraft <span class="green">Quiz</span>
+    </h2>
+
+    <p class="subtitle">
+        Test your Minecraft knowledge.
+    </p>
+
+    <div class="quiz">
+
+        <h3>
+            Which mob explodes near the player?
+        </h3>
+
+        <br>
+
+        <button onclick="answer(false)">
+            🐷 Pig
+        </button>
+
+        <button onclick="answer(true)">
+            💚 Creeper
+        </button>
+
+        <button onclick="answer(false)">
+            🐔 Chicken
+        </button>
+
+        <div id="result"></div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>
+        OM<span class="green">CRAFT</span>
+    </h2>
+
+    <p>
+        Built with HTML + CSS + JavaScript by Om 🚀
+    </p>
+
+    <br>
+
+    <p>
+        © 2026 OMCRAFT
+    </p>
+
+</footer>
+
+
+<script>
+
+/* XP SYSTEM */
+
+let xp = 0;
+
+function addXP(){
+
+    xp += 10;
+
+    document.getElementById("xpValue").innerText = xp;
+
+}
+
+
+/* BLOCK */
+
+function breakBlock(){
+
+    document.getElementById("blockText").innerText =
+    "💥 Block broken! +10 XP";
+
+    xp += 10;
+
+    document.getElementById("xpValue").innerText = xp;
+
+}
+
+
+/* QUIZ */
+
+function answer(correct){
+
+    let result = document.getElementById("result");
+
+    if(correct){
+
+        result.innerText = "✅ Correct! You are a Minecraft pro!";
+
+    }else{
+
+        result.innerText = "❌ Wrong answer. Try again!";
+
+    }
+
+}
+
+
+/* DARK / LIGHT MODE */
+
+function changeTheme(){
+
+    document.body.classList.toggle("light");
+
+    let button = document.getElementById("themeBtn");
+
+    if(document.body.classList.contains("light")){
+
+        button.innerText = "☀️";
+
+    }else{
+
+        button.innerText = "🌙";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
